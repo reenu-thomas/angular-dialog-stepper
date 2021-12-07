@@ -1,0 +1,67 @@
+<h2>{{data.title}}</h2>
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out your First Name</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First name" formControlName="firstName" [(ngModel)]="data.firstName" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Fill out your Last Name">
+    <form [formGroup]="secondFormGroup">
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput [(ngModel)]="data.lastName" formControlName="lastName" placeholder="Last Name"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Fill out your Email Address</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Email Address</mat-label>
+        <input matInput placeholder="Email Address" formControlName="email" [(ngModel)]="data.email" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="fourthFormGroup">
+    <form [formGroup]="fourthFormGroup">
+      <ng-template matStepLabel>Fill out your Phone Number</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Phone Number</mat-label>
+        <input matInput placeholder="Phone Number" formControlName="phone" [(ngModel)]="data.phone" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel (click)="onNoClick()">Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button [mat-dialog-close]="data.firstName" >Close</button>
+    </div>
+  </mat-step>
+</mat-stepper>
